@@ -5,6 +5,7 @@ const Post = require('../../models/Post');
 
 module.exports = {
   Mutation: {
+    // Create Comment
     createComment: async (_, { postId, body }, context) => {
       const { username } = checkAuth(context);
       if (body.trim() === '') {
@@ -27,6 +28,7 @@ module.exports = {
         return post;
       } else throw new UserInputError('Post not found');
     },
+    // Delete Comment
     async deleteComment(_, { postId, commentId }, context) {
       const { username } = checkAuth(context);
 
