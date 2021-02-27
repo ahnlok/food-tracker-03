@@ -30,7 +30,7 @@ module.exports = {
     async createPost(_, { body }, context) {
       const user = checkAuth(context);
 
-      if (body.trim() === '') {
+      if (args.body.trim() === '') {
         throw new Error('Post body must not be empty');
       }
 
@@ -42,10 +42,6 @@ module.exports = {
       });
 
       const post = await newPost.save();
-
-      context.pubsub.publish('NEW_POST', {
-          newPost: post
-      })
 
       context.pubsub.publish('NEW_POST', {
         newPost: post
