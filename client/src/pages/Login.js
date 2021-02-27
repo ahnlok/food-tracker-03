@@ -10,16 +10,16 @@ function Login(props) {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
-  const { onChange, onSubmit, values } = useForm(registerUser, {
+  const { onChange, onSubmit, values } = useForm(loginUserCallback, {
     username: '',
-    password: '', 
+    password: ''
   });
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(
       _,
       {
-        data: { register: userData }
+        data: { login: userData }
       }
     ) {
       context.login(userData);
@@ -38,7 +38,7 @@ function Login(props) {
   return (
     <div className="form-container">
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
-        <h1>Sign-In</h1>
+        <h1>Login</h1>
         <Form.Input
           label="Username"
           placeholder="Username.."
@@ -57,17 +57,8 @@ function Login(props) {
           error={errors.password ? true : false}
           onChange={onChange}
         />
-        <Form.Input
-          label="Confirm Password"
-          placeholder="Confirm Password.."
-          name="confirmPassword"
-          type="password"
-          value={values.confirmPassword}
-          error={errors.confirmPassword ? true : false}
-          onChange={onChange}
-        />
         <Button type="submit" primary>
-          Sign-In
+          Login
         </Button>
       </Form>
       {Object.keys(errors).length > 0 && (
@@ -84,21 +75,15 @@ function Login(props) {
 }
 
 const LOGIN_USER = gql`
-    mutation login(
-        $username: String!,
-        $password: String!,
-    ) {
-        login(
-            username: $username,
-            password: $password
-        ) {
-            id
-            email
-            username
-            createdAt
-            token
-        }
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      id
+      email
+      username
+      createdAt
+      token
     }
+  }
 `;
 
 export default Login;
