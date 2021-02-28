@@ -8,6 +8,7 @@
     "start": "node index",
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
+    "client": "cd client && npm start",
     "heroku-postbuild": "npm run install-client && npm run build"
   },
   "repository": {

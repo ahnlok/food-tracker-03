@@ -15,7 +15,11 @@ const server = new ApolloServer({
   context: ({ req }) => ({ req, pubsub })
 });
 
-mongoose.connect(process.env.MONGODB, { useNewUrlParser: true })
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     console.log('MongoDB Connected');
     return server.listen({ port: PORT });
