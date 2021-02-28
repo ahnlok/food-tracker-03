@@ -5,11 +5,7 @@
   "main": "server.js",
   "scripts": {
     "serve": "node server.js",
-    "start": "node server.js",
-    "client": "cd client && npm run start",
-    "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

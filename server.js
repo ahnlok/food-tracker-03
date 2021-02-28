@@ -1,4 +1,3 @@
-require("dotenv").config();
 const { ApolloServer, PubSub } = require('apollo-server');
 const mongoose = require('mongoose');
 
@@ -16,16 +15,7 @@ const server = new ApolloServer({
   context: ({ req }) => ({ req, pubsub })
 });
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
-
-mongoose.connect(process.env.MONGODB || "mongodb://localhost/food-tracker-03", { 
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
- })
+mongoose.connect(MONGODB, { useNewUrlParser: true })
   .then(() => {
     console.log('MongoDB Connected');
     return server.listen({ port: PORT });
