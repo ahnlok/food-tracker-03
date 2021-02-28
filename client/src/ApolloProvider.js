@@ -8,7 +8,7 @@ import { setContext } from 'apollo-link-context';
 
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:5000'
+    uri: 'https://shielded-basin-79613.herokuapp.com/'
 });
 
 // Will add token upon our request
